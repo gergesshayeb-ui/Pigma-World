@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pigma World — Global Tourism Marketplace & Voice AI Companion</title>
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/companion.css">
+    <link rel="stylesheet" href="css/explore.css">
+</head>
+<body>
+
+<!-- Start Welcome Overlay -->
+<div id="startOverlay">
+    <img src="assets/pigma-world-logo.png" alt="Pigma World Logo" class="intro-logo">
+    <button id="skipOverlayBtn">Explore Marketplace</button>
+    <div style="display:flex; gap:12px; margin-top:8px;">
+        <button id="startVoiceBtn">Start Voice Mode</button>
+        <button id="startTextBtn">Text Mode Only</button>
+    </div>
+</div>
+
+<!-- Main Top Navigation Bar with Official Branding -->
+<header class="pigma-navbar">
+    <div class="nav-container">
+        <a href="#" class="brand-logo" id="brandLogoHome">
+            <img src="assets/pigma-world-logo.png" alt="Pigma World" class="brand-logo-img">
+        </a>
+        <div class="nav-links">
+            <button class="nav-btn active" id="navExploreBtn">🧭 Explore</button>
+            <button class="nav-btn" id="navAibouBtn">
+                <span class="chain-icon">🔗</span> Aibou
+            </button>
+            <button class="nav-btn" id="navLangBtn">🌍 Language</button>
+            <button class="nav-btn" id="navTripBtn">🎒 My Trip (<span id="tripBadge">0</span>)</button>
+        </div>
+    </div>
+</header>
+
+<!-- Primary Framework Container: Learn → Explore → Book -->
+<main class="explore-page-wrapper">
+    <div class="framework-banner">
+        <span class="fw-step fw-active">1. Learn</span>
+        <span class="fw-sep">→</span>
+        <span class="fw-step fw-active">2. Explore</span>
+        <span class="fw-sep">→</span>
+        <span class="fw-step">3. Book</span>
+        <span class="fw-tagline">Worldwide Experiences • 7-Star Verified Standards • Zero Fake Availability</span>
+    </div>
+
+    <div class="explore-layout">
+        <!-- 3. Prominent Left Vertical Sidebar (~320px wide) -->
+        <aside class="explore-sidebar" id="exploreSidebar">
+            <div class="sidebar-header">
+                <h2>CATEGORIES</h2>
+                <p class="sub">Select or hover to preview destinations</p>
+            </div>
+            <div class="categories-list" id="categoryContainer">
+                <!-- Dynamically populated or static categories -->
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <section class="explore-main">
+            <!-- Dynamic Hero Preview with Cinematic Fade/Zoom -->
+            <div class="explore-hero" id="exploreHero">
+                <img src="https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?auto=format&fit=crop&w=1600&q=80" alt="Destination Hero Preview" id="heroPreviewImg">
+                <div class="overlay">
+                    <span class="cat-label" id="heroCategoryLabel">Tours & Activities</span>
+                    <h1 class="cat-title-lg" id="heroDestinationTitle">Luxor, Egypt — Open-Air Wonder</h1>
+                    <p class="cat-desc-lg" id="heroDestinationDesc">Breathtaking sunrise hot air balloon flights, pharaonic tombs, and timeless Nile navigation.</p>
+                </div>
+            </div>
+
+            <!-- 4. Search & Dynamic Filters Flow: Country → City/Destination → Category → Filters → Results -->
+            <div class="filter-journey-card">
+                <div class="journey-header">
+                    <span class="journey-badge">DISCOVERY JOURNEY</span>
+                    <span class="journey-path">Country → Destination → Category → Filters → Results</span>
+                </div>
+
+                <div class="explore-toolbar">
+                    <!-- Keyword Search -->
+                    <div class="search-input-group">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="exploreSearchInput" placeholder="Search experiences, activities, hotels, keywords...">
+                    </div>
+
+                    <!-- Step 1: Country -->
+                    <div class="toolbar-select-group">
+                        <label for="countrySelect">Country</label>
+                        <select id="countrySelect" class="filter-select">
+                            <option value="all">All Countries</option>
+                        </select>
+                    </div>
+
+                    <!-- Step 2: City / Destination -->
+                    <div class="toolbar-select-group">
+                        <label for="destinationSelect">City / Destination</label>
+                        <select id="destinationSelect" class="filter-select">
+                            <option value="all">All Destinations</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-reset-filters" id="resetFiltersBtn">Reset Filters</button>
+                </div>
+
+                <!-- Dynamic Category-Specific Filters Panel -->
+                <div class="filters-panel" id="dynamicFiltersPanel">
+                    <div class="filters-panel-header">
+                        <h4>DYNAMIC FILTERS & SPECIFICATIONS</h4>
+                        <span id="activeFiltersSummary" class="filters-summary">Showing All Experiences</span>
+                    </div>
+
+                    <div class="filters-grid">
+                        <!-- Dates -->
+                        <div class="filter-item">
+                            <label for="filterDate">Travel Date</label>
+                            <input type="date" id="filterDate">
+                        </div>
+
+                        <!-- Guests Count -->
+                        <div class="filter-item">
+                            <label for="filterGuests">Guests Count</label>
+                            <select id="filterGuests">
+                                <option value="any">Any Guests</option>
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guests</option>
+                                <option value="4">4+ Guests</option>
+                                <option value="8">8+ Large Group</option>
+                            </select>
+                        </div>
+
+                        <!-- Price Range -->
+                        <div class="filter-item">
+                            <label for="filterMaxPrice">Max Price (USD Equivalent)</label>
+                            <select id="filterMaxPrice">
+                                <option value="all">Any Price</option>
+                                <option value="50">Up to $50</option>
+                                <option value="150">Up to $150</option>
+                                <option value="300">Up to $300</option>
+                                <option value="1000">Up to $1,000</option>
+                                <option value="2500">Luxury / Ultra ($1,000+)</option>
+                            </select>
+                        </div>
+
+                        <!-- 1-7 Star Rating System -->
+                        <div class="filter-item">
+                            <label for="filterMinRating">7-Star Standard Rating</label>
+                            <select id="filterMinRating">
+                                <option value="0">All Ratings</option>
+                                <option value="6.5">★★★★★★☆ 6.5+ Stars</option>
+                                <option value="6.8">★★★★★★★ 6.8+ Stars</option>
+                                <option value="7.0">★ 7.0 Star Iconic Only</option>
+                            </select>
+                        </div>
+
+                        <!-- Language -->
+                        <div class="filter-item">
+                            <label for="filterLanguage">Language</label>
+                            <select id="filterLanguage">
+                                <option value="all">All Languages</option>
+                                <option value="English">English</option>
+                                <option value="Arabic">Arabic (العربية)</option>
+                                <option value="Japanese">Japanese (日本語)</option>
+                                <option value="French">French (Français)</option>
+                                <option value="Italian">Italian (Italiano)</option>
+                                <option value="German">German (Deutsch)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Results Grid Header & Count -->
+            <div class="results-header">
+                <div class="results-meta">
+                    <h3 id="resultsCountTitle">Available Experiences</h3>
+                    <span id="resultsCountBadge" class="results-count-badge">0 results</span>
+                </div>
+                <div class="results-sort">
+                    <label for="sortOrder">Sort by:</label>
+                    <select id="sortOrder" class="filter-select">
+                        <option value="featured">Featured First</option>
+                        <option value="rating_desc">Highest Rated (7-Star)</option>
+                        <option value="price_asc">Price: Low to High</option>
+                        <option value="price_desc">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 5. Results Grid & Listing Cards -->
+            <div class="explore-listings" id="exploreListingsGrid">
+                <!-- Dynamically populated listing cards -->
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Interactive Product / Service Details Modal -->
+<div id="productDetailModal" class="pigma-modal">
+    <div class="modal-dialog">
+        <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+        <div id="modalContentBody">
+            <!-- Populated via JavaScript -->
+        </div>
+    </div>
+</div>
+
+<!-- Language Selection Drawer / Modal -->
+<div id="langPanel" class="panel">
+    <button class="close" data-close="langPanel">&times;</button>
+    <h3>🌍 Select Marketplace Language</h3>
+    <button data-lang="en">English (Global)</button>
+    <button data-lang="ar">العربية (Egypt & Arab World)</button>
+    <button data-lang="ja">日本語 (Japan)</button>
+    <button data-lang="fr">Français (France)</button>
+    <button data-lang="it">Italiano (Italy)</button>
+    <button data-lang="de">Deutsch (Germany)</button>
+</div>
+
+<!-- Aibou Travel Companion AI Drawer -->
+<div id="aibouPanel" class="panel companion-drawer">
+    <button class="close" data-close="aibouPanel">&times;</button>
+    <div class="aibou-drawer-header">
+        <span class="chain-icon">🔗</span>
+        <h3>Aibou — Your Pigma World AI Companion</h3>
+    </div>
+    <p class="aibou-intro-text">Ask me anything about Luxor, Cairo, Tokyo, Bali, Paris, Rome, or tailoring your global itinerary.</p>
+    <div class="aibou-chat-box" id="aibouMessages">
+        <div class="msg-bubble pigma">Ahlan wa Marhaban! I am Aibou, your companion at Pigma World. Which destination shall we explore today?</div>
+    </div>
+    <div class="aibou-input-row">
+        <input type="text" id="aibouTextInput" placeholder="Ask Aibou (e.g. recommend sunrise tours in Luxor)...">
+        <button id="aibouSendBtn">Send</button>
+        <button id="aibouMicBtn" title="Toggle Speech Voice">🎙️</button>
+    </div>
+    <div id="aibouStatusText" class="aibou-status-label">Ready</div>
+</div>
+
+<!-- Scripts -->
+<script type="module" src="js/explore.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

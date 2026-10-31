@@ -1,0 +1,122 @@
+export const destinations = [
+  {
+    id: "luxor",
+    name: "Luxor",
+    country: "Egypt",
+    tagline: "The World's Greatest Open-Air Museum",
+    description: "Ancient Thebes, home to the monumental temples of Karnak and Luxor, and the legendary Valley of the Kings.",
+    heroImage: "https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1200&q=80",
+    productCount: 6,
+    currency: "EGP",
+    timezone: "Africa/Cairo",
+    featured: true
+  },
+  {
+    id: "cairo",
+    name: "Cairo",
+    country: "Egypt",
+    tagline: "The City of a Thousand Minarets & Pyramids",
+    description: "The Great Pyramids of Giza, the Grand Egyptian Museum, and the vibrant historic alleys of Khan el-Khalili.",
+    heroImage: "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&w=1200&q=80",
+    productCount: 4,
+    currency: "EGP",
+    timezone: "Africa/Cairo",
+    featured: true
+  },
+  {
+    id: "aswan",
+    name: "Aswan",
+    country: "Egypt",
+    tagline: "Jewel of the Nile & Nubian Wonder",
+    description: "Serene Nile cataracts, Philae Island Temple of Isis, and the majestic rock-cut temples of Abu Simbel.",
+    heroImage: "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80",
+    productCount: 3,
+    currency: "EGP",
+    timezone: "Africa/Cairo",
+    featured: true
+  },
+  {
+    id: "alexandria",
+    name: "Alexandria",
+    country: "Egypt",
+    tagline: "The Pearl of the Mediterranean",
+    description: "Greco-Roman catacombs, the Bibliotheca Alexandrina, and refreshing seaside sea breezes.",
+    heroImage: "https://images.unsplash.com/photo-1596701062351-8c2c14d1fdd0?auto=format&fit=crop&w=1200&q=80",
+    productCount: 2,
+    currency: "EGP",
+    timezone: "Africa/Cairo",
+    featured: false
+  },
+  {
+    id: "tokyo",
+    name: "Tokyo",
+    country: "Japan",
+    tagline: "Neon Metropolises & Timeless Shrines",
+    description: "Futuristic skyscrapers, tranquil Shinto shrines, Michelin-starred gastronomy, and vibrant pop culture districts.",
+    heroImage: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=80",
+    productCount: 5,
+    currency: "JPY",
+    timezone: "Asia/Tokyo",
+    featured: true
+  },
+  {
+    id: "kyoto",
+    name: "Kyoto",
+    country: "Japan",
+    tagline: "Imperial Heritage & Zen Bamboo Groves",
+    description: "Gilded temples, Arashiyama bamboo forests, historic tea ceremonies, and traditional wooden machiya houses.",
+    heroImage: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80",
+    productCount: 4,
+    currency: "JPY",
+    timezone: "Asia/Tokyo",
+    featured: true
+  },
+  {
+    id: "bali",
+    name: "Bali",
+    country: "Indonesia",
+    tagline: "Island of the Gods & Emerald Terraces",
+    description: "Verdant Ubud rice terraces, spiritual water temples, world-class beach clubs, and serene wellness retreats.",
+    heroImage: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
+    productCount: 5,
+    currency: "IDR",
+    timezone: "Asia/Makassar",
+    featured: true
+  },
+  {
+    id: "maldives",
+    name: "Malé & Atolls",
+    country: "Maldives",
+    tagline: "Turquoise Lagoons & Private Overwater Villas",
+    description: "Pristine coral atolls, luxury private overwater villas, crystal clear coral lagoons, and sunset catamaran cruises.",
+    heroImage: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1200&q=80",
+    productCount: 4,
+    currency: "USD",
+    timezone: "Indian/Maldives",
+    featured: true
+  },
+  {
+    id: "paris",
+    name: "Paris",
+    country: "France",
+    tagline: "The City of Light, Art & Haute Cuisine",
+    description: "The iconic Eiffel Tower, Louvre masterworks, romantic Seine river promenades, and world-class culinary salons.",
+    heroImage: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80",
+    productCount: 4,
+    currency: "EUR",
+    timezone: "Europe/Paris",
+    featured: true
+  },
+  {
+    id: "rome",
+    name: "Rome",
+    country: "Italy",
+    tagline: "The Eternal City & Imperial Splendor",
+    description: "Colosseum amphitheatres, Vatican artistic treasures, baroque piazzas, and authentic artisanal trattorias.",
+    heroImage: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80",
+    productCount: 4,
+    currency: "EUR",
+    timezone: "Europe/Rome",
+    featured: true
+  }
+];
