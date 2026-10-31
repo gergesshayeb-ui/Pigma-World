@@ -668,12 +668,79 @@ function bindExploreEvents() {
       if (e.target === productDetailModal) closeExploreDetailModal();
     });
   }
+
+  // Explicit direct click event listener for Explore navigation button
+  bindNavExploreButton();
+}
+
+export function openExploreView() {
+  // 1. Hide welcome overlay smoothly and completely
+  const overlay = document.getElementById("startOverlay");
+  if (overlay) {
+    overlay.classList.add("hide");
+    overlay.style.opacity = "0";
+    overlay.style.pointerEvents = "none";
+    setTimeout(() => {
+      overlay.style.display = "none";
+    }, 300);
+  }
+
+  // 2. Close any overlapping side panels (Language, Aibou)
+  const langPanel = document.getElementById("langPanel");
+  if (langPanel) {
+    langPanel.classList.remove("open");
+    langPanel.style.display = "none";
+  }
+  const aibouPanel = document.getElementById("aibouPanel");
+  if (aibouPanel) {
+    aibouPanel.classList.remove("open");
+    aibouPanel.style.display = "none";
+  }
+
+  // 3. Highlight Explore navigation button as active
+  document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
+  const navBtn = document.getElementById("navExploreBtn");
+  if (navBtn) navBtn.classList.add("active");
+
+  // 4. Ensure Explore page wrapper is visible & focused
+  const wrapper = document.querySelector(".explore-page-wrapper");
+  if (wrapper) {
+    wrapper.style.display = "block";
+    wrapper.style.opacity = "1";
+    wrapper.scrollIntoView({ behavior: "smooth" });
+  }
+
+  // Ensure category and hero previews are populated
+  if (!categoryContainer || categoryContainer.children.length === 0) {
+    renderCategories();
+  }
+}
+
+export function bindNavExploreButton() {
+  const exploreBtn = document.getElementById("navExploreBtn");
+  if (exploreBtn) {
+    exploreBtn.removeEventListener("click", openExploreView);
+    exploreBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      openExploreView();
+    });
+  }
+
+  const skipBtn = document.getElementById("skipOverlayBtn");
+  if (skipBtn) {
+    skipBtn.removeEventListener("click", openExploreView);
+    skipBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      openExploreView();
+    });
+  }
 }
 
 // Expose ExploreModule on window so legacy scripts (app.js) detect the modern module
 if (typeof window !== 'undefined') {
   window.ExploreModule = {
     initExploreModule,
+    openExploreView,
     renderCategories,
     applyExploreFilters,
     renderListingCards,
@@ -685,7 +752,11 @@ if (typeof window !== 'undefined') {
   };
 }
 
-// Auto bootstrap on document load
+// Auto bootstrap on document load or immediately if already ready
 if (typeof document !== 'undefined') {
-  document.addEventListener("DOMContentLoaded", initExploreModule);
+  if (document.readyState === 'loading') {
+    document.addEventListener("DOMContentLoaded", initExploreModule);
+  } else {
+    initExploreModule();
+  }
 }

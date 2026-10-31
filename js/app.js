@@ -636,10 +636,16 @@ function bindEvents() {
   if (navExploreBtn) {
     navExploreBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      dismissOverlay();
-      const exploreWrapper = document.querySelector('.explore-page-wrapper');
-      if (exploreWrapper) {
-        exploreWrapper.scrollIntoView({ behavior: 'smooth' });
+      if (window.ExploreModule && typeof window.ExploreModule.openExploreView === 'function') {
+        window.ExploreModule.openExploreView();
+      } else {
+        dismissOverlay();
+        const exploreWrapper = document.querySelector('.explore-page-wrapper');
+        if (exploreWrapper) {
+          exploreWrapper.style.display = 'block';
+          exploreWrapper.style.opacity = '1';
+          exploreWrapper.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     });
   }
