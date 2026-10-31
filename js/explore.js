@@ -378,12 +378,12 @@ export function applyExploreFilters() {
 export function renderListingCards(items) {
   if (!exploreListingsGrid) return;
 
-  if (items.length === 0) {
+  if (!items || items.length === 0) {
     exploreListingsGrid.innerHTML = `
       <div class="empty-state-box">
         <div class="empty-icon">🌍</div>
-        <h3>No matching experiences found</h3>
-        <p>No verified listings match your chosen filters. Try resetting filters or expanding your search destination.</p>
+        <h3>No listings available yet</h3>
+        <p>No verified marketplace listings match the selected filters or destination criteria. Connect to the live catalog or reset your discovery filters below.</p>
         <button class="btn-reset-filters" id="emptyResetBtn">Reset All Filters</button>
       </div>
     `;
@@ -668,6 +668,21 @@ function bindExploreEvents() {
       if (e.target === productDetailModal) closeExploreDetailModal();
     });
   }
+}
+
+// Expose ExploreModule on window so legacy scripts (app.js) detect the modern module
+if (typeof window !== 'undefined') {
+  window.ExploreModule = {
+    initExploreModule,
+    renderCategories,
+    applyExploreFilters,
+    renderListingCards,
+    openExploreDetailModal,
+    closeExploreDetailModal,
+    resetAllFilters,
+    ExploreState,
+    EXPLORE_CATEGORIES
+  };
 }
 
 // Auto bootstrap on document load

@@ -36,9 +36,9 @@ const DOM = {
   searchInput: document.getElementById('searchInput'),
 
   // Modals & Drawers
-  productModal: document.getElementById('productModal') || document.getElementById('exploreModal'),
-  modalBody: document.getElementById('modalBody') || document.getElementById('exploreModalContent'),
-  modalCloseBtn: document.getElementById('modalCloseBtn') || document.getElementById('exploreModalClose'),
+  productModal: document.getElementById('productModal') || document.getElementById('productDetailModal'),
+  modalBody: document.getElementById('modalBody') || document.getElementById('modalContentBody'),
+  modalCloseBtn: document.getElementById('modalCloseBtn'),
   tripDrawer: document.getElementById('tripDrawer'),
   tripBadge: document.getElementById('tripBadge'),
   favBadge: document.getElementById('favBadge'),
@@ -621,29 +621,93 @@ function toggleAibouPanel() {
 
 // 7. Event Binding
 function bindEvents() {
-  // Add skip button handling for intro overlay
-  const skipBtn = document.getElementById('skipOverlayBtn');
-  if (skipBtn && DOM.startOverlay) {
-    skipBtn.addEventListener('click', () => {
+  // Dismiss intro overlay helper
+  const dismissOverlay = () => {
+    if (DOM.startOverlay) {
       DOM.startOverlay.style.opacity = '0';
-      setTimeout(() => DOM.startOverlay.style.display = 'none', 400);
+      setTimeout(() => {
+        DOM.startOverlay.style.display = 'none';
+      }, 350);
+    }
+  };
+
+  // Nav Explore Button: smoothly navigates to Explore module and shows vertical sidebar
+  const navExploreBtn = document.getElementById('navExploreBtn');
+  if (navExploreBtn) {
+    navExploreBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      dismissOverlay();
+      const exploreWrapper = document.querySelector('.explore-page-wrapper');
+      if (exploreWrapper) {
+        exploreWrapper.scrollIntoView({ behavior: 'smooth' });
+      }
     });
   }
-  // Auto-hide intro overlay after 3 seconds if still visible
-  if (DOM.startOverlay) {
-    setTimeout(() => {
-      if (DOM.startOverlay.style.display !== 'none') {
-        DOM.startOverlay.style.opacity = '0';
-        setTimeout(() => DOM.startOverlay.style.display = 'none', 400);
+
+  // Brand logo home link
+  const brandLogoHome = document.getElementById('brandLogoHome');
+  if (brandLogoHome) {
+    brandLogoHome.addEventListener('click', (e) => {
+      e.preventDefault();
+      dismissOverlay();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Nav Language Button
+  const navLangBtn = document.getElementById('navLangBtn');
+  const langPanel = document.getElementById('langPanel');
+  if (navLangBtn && langPanel) {
+    navLangBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      langPanel.classList.toggle('open');
+      langPanel.style.display = langPanel.classList.contains('open') ? 'block' : 'none';
+    });
+  }
+
+  // Nav Trip Button
+  const navTripBtn = document.getElementById('navTripBtn');
+  if (navTripBtn) {
+    navTripBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showMyTripDrawer();
+    });
+  }
+
+  // Generic data-close panel buttons
+  document.querySelectorAll('[data-close]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-close');
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) {
+        targetPanel.classList.remove('open');
+        targetPanel.style.display = 'none';
       }
-    }, 3000);
+    });
+  });
+
+  // Language selection buttons
+  document.querySelectorAll('#langPanel [data-lang]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang');
+      alert(`Language switched to: ${btn.innerText.trim()}`);
+      if (langPanel) {
+        langPanel.classList.remove('open');
+        langPanel.style.display = 'none';
+      }
+    });
+  });
+
+  // Add skip button handling for intro overlay
+  const skipBtn = document.getElementById('skipOverlayBtn');
+  if (skipBtn) {
+    skipBtn.addEventListener('click', dismissOverlay);
   }
 
   // PIGMA WORLD Intro Overlay buttons
   if (DOM.startVoiceBtn) {
     DOM.startVoiceBtn.addEventListener('click', () => {
-      DOM.startOverlay.style.opacity = '0';
-      setTimeout(() => DOM.startOverlay.style.display = 'none', 400);
+      dismissOverlay();
       AppState.isVoiceMode = true;
       openAibouPanel();
       if (recognition) {
@@ -654,8 +718,7 @@ function bindEvents() {
 
   if (DOM.startTextBtn) {
     DOM.startTextBtn.addEventListener('click', () => {
-      DOM.startOverlay.style.opacity = '0';
-      setTimeout(() => DOM.startOverlay.style.display = 'none', 400);
+      dismissOverlay();
       AppState.isVoiceMode = false;
       setAibouStatus("Text chat mode active");
       openAibouPanel();
