@@ -1,0 +1,5 @@
+node_modules/
+.env
+*.log
+screenshot_*.png
+verification/
